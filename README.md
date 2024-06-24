@@ -41,7 +41,7 @@ my expectation was to get
 
 and so forth as a result.
 That is what I understand should happen if the QMultiMap, like other associative containers in Qt, maintains the elements in a sorted order.
-However, I see that the result is just reversed
+However, I see that the result is just reversed when iterating it and printing:
 ```sh
 "e Value7"
 "c Value1"
@@ -52,3 +52,19 @@ However, I see that the result is just reversed
 ```
 
 Note that I addded some letters to the front, just to make sure it isn't ordered alphabetically.
+
+
+## Workaround ##
+
+It seems possible to avoid this be manually creating a reverse iterator.
+```C++
+    QMultiMap<QString, QString>::iterator rit = myMultiMap.upperBound(key);
+    QMultiMap<QString, QString>::iterator end = myMultiMap.lowerBound(key);
+
+    while (rit != end) {
+        --rit;
+        qDebug() << rit.value();
+    }
+```
+
+However, it is unclear what unwanted effects this might have tbh.
