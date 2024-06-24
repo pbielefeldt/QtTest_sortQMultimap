@@ -19,10 +19,19 @@ int main(int argc, char *argv[])
     myMultiMap.insert("Key2", "2 ValueC");
     myMultiMap.insert("Key2", "4 ValueD");
 
-    QStringList values = myMultiMap.values("Key1");
-    foreach (const QString &value, values) {
-        qDebug() << value;
-    }
+    //QStringList values = myMultiMap.values("Key1");
+    //foreach (const QString &value, values) {
+    //    qDebug() << value;
+    //}
+	const QString key("Key1");
+	QMultiMap<QString, QString>::iterator i = myMultiMap.lowerBound(key);
+	QMultiMap<QString, QString>::iterator end = myMultiMap.upperBound(key);
+
+    while (i != end) {
+		qDebug() << i.value();
+		++i;
+	}
+
 
     return a.exec();
 }
