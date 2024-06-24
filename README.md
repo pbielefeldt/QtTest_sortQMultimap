@@ -9,8 +9,9 @@ I tested it out.
 ## Build ##
 
 ```sh
-qmake -project
-qmake
+mkdir build
+cd build
+qmake ..
 
 make
 ```
@@ -24,20 +25,30 @@ Run with
 
 As I added
 ```C++
-    myMultiMap.insert("Key1", "Value1");
-    myMultiMap.insert("Key1", "Value2");
+    myMultiMap.insert("Key1", "f Value5");
+    myMultiMap.insert("Key1", "d Value4");
+    myMultiMap.insert("Key1", "b Value3");
+    myMultiMap.insert("Key1", "a Value2");
+    myMultiMap.insert("Key1", "c Value1");
+    myMultiMap.insert("Key1", "e Value7");
 ```
 
 my expectation was to get
 ```sh
-"Value1"
-"Value2"
+"f Value5"
+"d Value4"
 ```
 
-as a result.
+and so forth as a result.
 That is what I understand should happen if the QMultiMap, like other associative containers in Qt, maintains the elements in a sorted order.
 However, I see that the result is just reversed
 ```sh
-"Value1"
-"Value2"
+"e Value7"
+"c Value1"
+"a Value2"
+"b Value3"
+"d Value4"
+"f Value5"
 ```
+
+Note that I addded some letters to the front, just to make sure it isn't ordered alphabetically.
